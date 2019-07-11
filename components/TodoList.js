@@ -46,7 +46,7 @@ export default class TodoList extends Component {
 
 <Text>Todo List</Text>
                 {todoMapper}
-            <TextInput placeholder='type todo info' style={this.state.showInput?styles.adder : styles.hidden} onChangeText={(text)=>{
+            <TextInput placeholder='type todo info' value={this.state.inputVal} style={this.state.showInput?styles.adder : styles.hidden}  onChangeText={(text)=>{
                 this.setState({
                     inputVal:text, 
                     id:++id, 
@@ -69,7 +69,8 @@ export default class TodoList extends Component {
                                 text:this.state.inputVal, 
                                 isComplete:false
                             } ],
-                            showInput:false
+                            showInput:false, 
+                            inputVal:''
                         })
                         Keyboard.dismiss()
                     }
@@ -86,7 +87,7 @@ const styles= StyleSheet.create({
     adder: {
         position:'absolute',
         top:50,
-        padding:50, 
+        // padding:50, 
         backgroundColor:'yellow'
     }, 
     container: {
