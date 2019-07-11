@@ -29,6 +29,7 @@ export default class TodoList extends Component {
         showInput:false, 
         inputVal:''
      }
+
     
 removeTodo=(id)=>{
     let newArr= [...this.state.todos]
@@ -57,7 +58,19 @@ removeTodo=(id)=>{
 
 <Text>Todo List</Text>
                 {todoMapper}
-            <TextInput placeholder='type todo info' value={this.state.inputVal} style={this.state.showInput?styles.adder : styles.hidden}  onChangeText={(text)=>{
+            <TextInput  autoFocus={true} placeholder='type todo info' value={this.state.inputVal} style={this.state.showInput?styles.adder : styles.hidden} onSubmitEditing={()=>{
+                                        this.setState({
+                                            todos:[...this.state.todos, {
+                                                id:++id, 
+                                                text:this.state.inputVal, 
+                                            isComplete:false
+                                            } ],
+                                            showInput:false, 
+                                            inputVal:''
+                                        })
+                                        Keyboard.dismiss()
+                
+            }}  onChangeText={(text)=>{
                 this.setState({
                     inputVal:text, 
                     id:++id, 
