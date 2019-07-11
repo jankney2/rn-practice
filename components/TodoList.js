@@ -30,13 +30,24 @@ export default class TodoList extends Component {
         inputVal:''
      }
     
+removeTodo=(id)=>{
+    let newArr= [...this.state.todos]
 
+    let index=this.state.todos.findIndex(el=>{
+        return el.id===id
+    })
+    newArr.splice(index, 1)
+    
+    this.setState({
+        todos:newArr
+    })
+}
 
     
     render() {
     
     let todoMapper=this.state.todos.map((el,i)=>{
-        return <Todo text={el.text} key={i} update={el.id} isComplete={el.isComplete}/>
+        return <Todo text={el.text} key={i} edit={el.id} deleter={this.removeTodo} isComplete={el.isComplete}/>
     })
         return (
 
