@@ -1,19 +1,18 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet } from "react-native";
-import { CheckBox} from 
-"react-native-elements";
-import EditInput from './EditInput'
+import { Text, View, StyleSheet, TextInput } from "react-native";
+import { CheckBox, Button } from "react-native-elements";
 import Icon from "react-native-vector-icons/EvilIcons";
 
-const trash = <Icon name="trash" size={30} color="#900" />
-const editIcon= <Icon name='pencil' size={30} color='#900'/>
+const trash = <Icon name="trash" size={30} color="#900" />;
+const editIcon = <Icon name="pencil" size={30} color="#900" />;
 
 export default class Todo extends Component {
   state = {
     isComplete: this.props.isComplete,
     text: this.props.text,
-    checked: false, 
-    editing:false
+    checked: false,
+    editing: false,
+    newText: ""
   };
   render() {
     return (
@@ -31,24 +30,54 @@ export default class Todo extends Component {
         </View>
 
         <Text
-          style={this.state.isComplete ? styles.completed : styles.todoText}
+          style={[
+            this.state.isComplete ? styles.completed : styles.todoText,
+            this.state.editing ? styles.hidden : null
+          ]}
         >
           {this.props.text}
         </Text>
 
-        <Text onPress={()=>{
-            this.props.deleter(this.props.edit)
-        }}>{trash}</Text>
-        <Text onPress={()=>{
+        <View>
+          <TextInput
+            onChangeText={text => {
+              this.setState({
+                text: text
+              });
+            }}
+            value={this.state.text}
+            style={this.state.editing ? styles.todoText : styles.hidden}
+          />
+
+          <Button
+            style={this.state.editing ? styles.contain : styles.hidden}
+            title="save"
+            onPress={()=>{
+                this.props.editor(this.props.edit, this.state.text)
+                this.setState({
+                    editing:false
+                })
+            }}
+          />
+        </View>
+
+        <Text
+          onPress={() => {
             this.setState({
-                editing:!this.state.editing
-            })
-        }}>{editIcon}</Text>
+              editing: !this.state.editing
+            });
+          }}
+        >
+          {editIcon}
+        </Text>
 
-
-        <EditInput style={this.state.editing ? null:styles.hidden}/>
-
-
+        <Text
+          onPress={() => {
+            this.props.deleter(this.props.edit);
+          }}
+        >
+          {trash}
+        </Text>
       </View>
     );
   }
@@ -76,9 +105,8 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: "center",
     alignItems: "center"
-  }, 
-  hidden:{
-      display:'none'
+  },
+  hidden: {
+    display: "none"
   }
- 
 });
