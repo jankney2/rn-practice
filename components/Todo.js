@@ -1,16 +1,19 @@
 import React, { Component } from "react";
 import { Text, View, StyleSheet } from "react-native";
-import { CheckBox} from "react-native-elements";
-
+import { CheckBox} from 
+"react-native-elements";
+import EditInput from './EditInput'
 import Icon from "react-native-vector-icons/EvilIcons";
 
 const trash = <Icon name="trash" size={30} color="#900" />
+const editIcon= <Icon name='pencil' size={30} color='#900'/>
 
 export default class Todo extends Component {
   state = {
     isComplete: this.props.isComplete,
     text: this.props.text,
-    checked: false
+    checked: false, 
+    editing:false
   };
   render() {
     return (
@@ -36,6 +39,16 @@ export default class Todo extends Component {
         <Text onPress={()=>{
             this.props.deleter(this.props.edit)
         }}>{trash}</Text>
+        <Text onPress={()=>{
+            this.setState({
+                editing:!this.state.editing
+            })
+        }}>{editIcon}</Text>
+
+
+        <EditInput style={this.state.editing ? null:styles.hidden}/>
+
+
       </View>
     );
   }
@@ -63,5 +76,9 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: "center",
     alignItems: "center"
+  }, 
+  hidden:{
+      display:'none'
   }
+ 
 });
