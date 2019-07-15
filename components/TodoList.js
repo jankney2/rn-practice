@@ -52,12 +52,11 @@ export default class TodoList extends Component {
     let index = this.state.todos.findIndex(el => {
       return el.id === id;
     });
-    newArr[index].text=newText
+    newArr[index].text = newText;
 
     this.setState({
-        todos:newArr
-    })
-
+      todos: newArr
+    });
   };
 
   render() {
@@ -76,7 +75,7 @@ export default class TodoList extends Component {
     return (
       <KeyboardAvoidingView behavior="position">
         <View style={styles.container}>
-          <Text>Todo List</Text>
+          <Text style={styles.header}>Todos</Text>
           {todoMapper}
           <TextInput
             autoFocus={false}
@@ -108,6 +107,7 @@ export default class TodoList extends Component {
           />
 
           <Button
+            style={styles.ten}
             title="add todo"
             onPress={() => {
               if (!this.state.showInput) {
@@ -139,28 +139,38 @@ export default class TodoList extends Component {
 
 const styles = StyleSheet.create({
   adder: {
-    marginTop:0,
+    marginTop: 0,
     position: "absolute",
-    textAlign:"center",
-    fontSize:26,
-    justifyContent:'center',
-    height:900, 
-    width:425,
-    zIndex:2,
-
+    textAlign: "center",
+    fontSize: 26,
+    // justifyContent:'center',
+    height: 450,
+    width: 300,
+    // zIndex: 2,
+    backgroundColor: "tomato", 
+    borderRadius:10,
+  },
+  ten: {
+    position:'relative',
+    // position: "absolute", 
+    // top:0,
+    // fontSize: 30
   },
   container: {
-
     padding: 10,
-    display:'flex', 
-    flexDirection:'column', 
-    justifyContent:'center',
-    alignItems:'center',
-    borderColor:'green',
-    borderWidth:4
-
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    borderColor: "green",
+    borderWidth: 1,
+    borderRadius: 10
   },
   hidden: {
     display: "none"
+  },
+  header: {
+    fontSize: 36
   }
+  
 });
