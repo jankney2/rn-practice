@@ -139,13 +139,26 @@ export default class TodoList extends Component {
 
 const styles = StyleSheet.create({
   adder: {
+    marginTop:0,
     position: "absolute",
-    top: 50,
-    // padding:50,
-    backgroundColor: "yellow"
+    textAlign:"center",
+    fontSize:26,
+    justifyContent:'center',
+    height:900, 
+    width:425,
+    zIndex:2,
+
   },
   container: {
-    padding: 10
+
+    padding: 10,
+    display:'flex', 
+    flexDirection:'column', 
+    justifyContent:'center',
+    alignItems:'center',
+    borderColor:'green',
+    borderWidth:4
+
   },
   hidden: {
     display: "none"

@@ -5,6 +5,7 @@ import TodoList from './components/TodoList'
 export default function App() {
   return (
     <View style={styles.container}>
+      <Text>To Dos</Text>
 <TodoList/>
     </View>
   );
@@ -13,8 +14,10 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#9ddae0',
+    justifyContent:'center',
+    alignItems:'center'
+
+
   },
 });
